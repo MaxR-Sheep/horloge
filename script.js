@@ -16,6 +16,22 @@ if (localStorage.getItem("mode") === "Dark Mode") {
 modeSwitch.addEventListener("click", () => {
   body.classList.add("dark");
   const isDarkMode = body.classList.contains("dark");
-  modeSwitch.textContent = isDarkMode ? "Ligth Mode" : "Dark Mode";
+  modeSwitch.textContent = isDarkMode ? "Light Mode" : "Dark Mode";
   localStorage.setItem("mode", isDarkMode ? "Dark Mode" : "Light Mode");
 });
+
+// fonction pour les mouvements aiguilles selon le temps
+
+const updateTime = () => {
+  let date = new date();
+  let secToDeg = (date.getSeconds() / 60) * 360;
+  let minToDeg = (date.getMinutes() / 60) * 360;
+  let hrToDeg = (date.getHours() / 12) * 360;
+
+  secondHand.style.transform = rotate({ secToDeg });
+  minuteHand.style.transform = rotate({ minToDeg });
+  hourHand.style.transform = rotate({ hrToDeg });
+};
+
+setInterval(updateTime, 1000);
+updateTime();
